@@ -1,0 +1,31 @@
+version: '3'
+services:
+  db1:
+          image: mysql:5.7
+          volumes:
+                   -mysql_storage:/var/lib/mysql
+          restart: always
+          environment:
+                    MYSQL_ROOT_PASSWORD: abhilasha24
+                    MYSQL_USER: abhilasha
+                    MYSQL_PASSWORD: redhat
+                    MYSQL_DATABASE: mydb
+          depends_on:
+                             -db1
+          ports: 
+                            -1234:88
+
+  
+  web1:
+      image:wordpress:5.1.1-php7.3-apache
+      volume:
+                -wordpress_storage:/var/www/html
+      restart: always
+      environment:
+                 WORDPRESS_DB_HOST:db1
+                 WORDPRESS_DB_HOST:abhilasha
+                 WORDPRESS_DB_HOST:redhat
+                 WORDPRESS_DB_HOST:mydb
+volumes:
+  mysql_storage:
+  wordpress_storage:
